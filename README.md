@@ -1,3 +1,5 @@
+![Kushmanmb's GitHub Banner](https://raw.githubusercontent.com/Kushmanmb/Kushmanmb/main/banner.png)
+
 # OctoCanvas 🎨
 
 A static web application that creates GitHub-themed collectibles from GitHub profiles. Build custom wallpapers, generate profile README banners with avatar art styles, and create trading card-style Devémon Cards with rarity systems. Built with Astro, Preact, TypeScript, and Tailwind CSS—fully client-side and deployable to GitHub Pages.
