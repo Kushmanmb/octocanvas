@@ -396,3 +396,28 @@
   color: inherit;
   text-decoration: none;
 }
+/* Repo Studio tab: wider single-column layout */
+.LeftColumn--wide {
+  max-width: 1400px;
+}
+
+.StudioPanel {
+  padding: var(--space-md);
+  background-color: var(--color-bg-primary);
+  border: 2px solid var(--color-border-tertiary);
+}
+
+@media (min-width: 640px) {
+  .StudioPanel {
+    padding: var(--space-2xl);
+  }
+}
+
+@media (max-width: 543px) {
+  .TabButton {
+    min-width: 0;
+    white-space: normal;
+    line-height: 1.2;
+    min-height: 44px;
+  }
+}
