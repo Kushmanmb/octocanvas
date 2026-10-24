@@ -24,6 +24,7 @@ import WallpaperGenerator, {
 import DevemonCard, { type DevemonCardRef } from "./DevemonCard";
 import ReadmeBanner, { type ReadmeBannerRef } from "./ReadmeBanner";
 import ActionButtonsArea from "./ActionButtonsArea";
+import RepoStudio from "./RepoStudio";
 import { TextInput, PrimerSelect, Checkbox } from "./ui/FormControls";
 import { PrimaryButton, SecondaryButton } from "./ui/Button";
 import { Icon } from "./ui/Icon";
@@ -114,7 +115,11 @@ export default function GitHubWallpaperApp() {
     { label: "Wallpaper", shortLabel: "Wallpaper" },
     { label: "Devémon Card", shortLabel: "Devémon" },
     { label: "README Banner", shortLabel: "Banner" },
+    { label: "Repo Studio", shortLabel: "Repo" },
   ];
+
+  const isStudio = selectedTab === 3;
+  const showPreview = !!userData && !isStudio;
 
   const runAction = async (actionId: string, action?: () => void | Promise<void>) => {
     if (!action || busyAction) return;
@@ -300,13 +305,15 @@ export default function GitHubWallpaperApp() {
 
   return (
     <div
-      className={`${userData
+      className={`${showPreview
         ? `${styles.MainLayout} ${styles["MainLayout--active"]}`
         : styles.MainLayout
         }`}
     >
       {/* Left Column - Form and Controls */}
-      <div className={styles.LeftColumn}>
+      <div
+        className={`${styles.LeftColumn} ${isStudio ? styles["LeftColumn--wide"] : ""}`}
+      >
         {/* Tabbed Container */}
         <div className={styles.TabContainer}>
           {/* Tab Navigation */}
@@ -334,8 +341,19 @@ export default function GitHubWallpaperApp() {
             ))}
           </div>
 
+          {isStudio && (
+            <div
+              role="tabpanel"
+              id="tabpanel-generation-3"
+              aria-labelledby="tab-generation-3"
+              className={styles.StudioPanel}
+            >
+              <RepoStudio />
+            </div>
+          )}
+
           {/* Tab Panel Container */}
-          <div className={styles.TabPanelContainer}>
+          <div className={styles.TabPanelContainer} hidden={isStudio}>
             <div>
               <form onSubmit={fetchGitHubUser} className={styles.FormContent}>
                 <div>
@@ -562,7 +580,7 @@ export default function GitHubWallpaperApp() {
       </div>
 
       {/* Right Column - Preview and Actions */}
-      {userData && (
+      {showPreview && (
         <div className={styles.RightColumn}>
           {/* Wallpaper Generator */}
           <div
